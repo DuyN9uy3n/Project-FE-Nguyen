@@ -12,7 +12,6 @@
   </head>
   <body>
     <div class="app-container">
-      <!-- Sidebar -->
       <aside class="sidebar">
         <div class="sidebar-header">
           <div class="logo">
@@ -37,7 +36,10 @@
         <nav class="sidebar-menu">
           <ul>
             <li>
-              <a href="../dashboard/index.html" id="dashboardLink">
+              <a
+                href="/Project_FE/pages/dashboard/dashboard.html"
+                id="dashboardLink"
+              >
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Dashboard</span>
               </a>
@@ -82,16 +84,14 @@
         </nav>
 
         <div class="sidebar-footer">
-          <a href="../auth/login.html">
+          <a href="/Project_FE/pages/auth/login.html">
             <i class="fas fa-sign-out-alt"></i>
             <span>Đăng xuất</span>
           </a>
         </div>
       </aside>
 
-      <!-- Main Content -->
       <main class="main-content">
-        <!-- Top Header -->
         <header class="main-header">
           <div class="header-search">
             <i class="fas fa-search"></i>
@@ -101,35 +101,93 @@
             <div class="notification-bell">
               <i class="fas fa-bell"></i>
               <span class="notification-count">3</span>
+              <div class="notification-dropdown">
+                <div class="notification-header">
+                  <h3>Thông báo</h3>
+                  <a href="#">Đánh dấu tất cả đã đọc</a>
+                </div>
+                <div class="notification-list">
+                  <div class="notification-item">
+                    <div class="notification-icon">
+                      <i class="fas fa-comment-alt"></i>
+                    </div>
+                    <div class="notification-content">
+                      <p>Bình Nguyễn đã bình luận về nhiệm vụ của bạn</p>
+                      <span class="notification-time">5 phút trước</span>
+                    </div>
+                  </div>
+                  <div class="notification-item">
+                    <div class="notification-icon">
+                      <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="notification-content">
+                      <p>Nhiệm vụ "Thiết kế logo" đã được hoàn thành</p>
+                      <span class="notification-time">1 giờ trước</span>
+                    </div>
+                  </div>
+                  <div class="notification-item">
+                    <div class="notification-icon">
+                      <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="notification-content">
+                      <p>Hải Phạm đã được thêm vào dự án</p>
+                      <span class="notification-time">Hôm qua</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="notification-footer">
+                  <a href="#">Xem tất cả thông báo</a>
+                </div>
+              </div>
             </div>
             <div class="header-user">
               <img src="https://i.pravatar.cc/150?img=3" alt="User" />
               <span>Nguyễn Văn A</span>
               <i class="fas fa-chevron-down"></i>
+              <div class="user-dropdown">
+                <ul>
+                  <li>
+                    <a href="#"><i class="fas fa-user"></i> Hồ sơ</a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fas fa-cog"></i> Cài đặt</a>
+                  </li>
+                  <li>
+                    <a href="/Project_FE/pages/auth/login.html"
+                      ><i class="fas fa-sign-out-alt"></i> Đăng xuất</a
+                    >
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </header>
 
-        <!-- Project Detail Content -->
+        <div class="breadcrumb-nav">
+          <ul class="breadcrumb">
+            <li>
+              <a href="/Project_FE/pages/dashboard/dashboard.html">Dashboard</a>
+            </li>
+            <li>
+              <a href="/Project_FE/pages/dashboard/dashboard.html">Dự án</a>
+            </li>
+            <li class="active">Xây dựng website thương mại điện tử</li>
+          </ul>
+        </div>
+
         <div class="project-content">
           <div class="project-header">
-            <h1>Xây dựng website thương mại điện tử</h1>
-            <button class="btn btn-primary" id="addTaskBtn">
-              <i class="fas fa-plus"></i> Thêm nhiệm vụ
-            </button>
+            <h1></h1>
+            <div class="project-actions">
+              <button class="btn btn-outline btn-edit-project">
+                <i class="fas fa-edit"></i> Sửa dự án
+              </button>
+              <button class="btn btn-primary" id="addTaskBtn">
+                <i class="fas fa-plus"></i> Thêm nhiệm vụ
+              </button>
+            </div>
           </div>
 
-          <!-- Project Description -->
-          <div class="project-description">
-            <p>
-              Dự án nhằm phát triển một nền tảng thương mại điện tử với các tính
-              năng phong phú giỏ hàng, thanh toán và quản lý sản phẩm. Giao diện
-              người dùng sẽ được tối ưu hóa cho cả máy tính và thiết bị di động,
-              với trải nghiệm mua sắm trực tuyến liền mạch.
-            </p>
-          </div>
-
-          <!-- Project Members -->
           <div class="project-section">
             <div class="section-header">
               <h2>Thành viên dự án</h2>
@@ -207,16 +265,19 @@
 
             <div class="task-categories">
               <div class="category-tabs">
-                <div class="category-tab active">
+                <div class="category-tab active" data-status="all">
+                  Tất cả <span class="task-count">12</span>
+                </div>
+                <div class="category-tab" data-status="todo">
                   To do <span class="task-count">4</span>
                 </div>
-                <div class="category-tab">
+                <div class="category-tab" data-status="in-progress">
                   In Progress <span class="task-count">2</span>
                 </div>
-                <div class="category-tab">
+                <div class="category-tab" data-status="pending">
                   Pending <span class="task-count">1</span>
                 </div>
-                <div class="category-tab">
+                <div class="category-tab" data-status="done">
                   Done <span class="task-count">5</span>
                 </div>
               </div>
@@ -227,19 +288,22 @@
                 <input
                   type="text"
                   class="search-input"
+                  id="taskSearch"
                   placeholder="Tìm kiếm nhiệm vụ..."
                 />
-                <select class="form-select">
-                  <option>Sắp xếp theo</option>
-                  <option>Tên nhiệm vụ</option>
-                  <option>Ưu tiên</option>
-                  <option>Tiến độ</option>
+                <select class="form-select" id="taskSort">
+                  <option value="name">Sắp xếp theo tên</option>
+                  <option value="priority">Sắp xếp theo ưu tiên</option>
+                  <option value="deadline">Sắp xếp theo deadline</option>
+                  <option value="status">Sắp xếp theo trạng thái</option>
                 </select>
-                <select class="form-select">
-                  <option>Người phụ trách</option>
-                  <option>Tất cả</option>
-                  <option>An Nguyen</option>
-                  <option>Bình Nguyễn</option>
+                <select class="form-select" id="taskAssignee">
+                  <option value="all">Tất cả thành viên</option>
+                  <option value="1">An Nguyen</option>
+                  <option value="2">Bình Nguyễn</option>
+                  <option value="3">Cường Trần</option>
+                  <option value="4">Dương Lê</option>
+                  <option value="5">Hải Phạm</option>
                 </select>
               </div>
             </div>
@@ -252,28 +316,38 @@
                     <th>Người phụ trách</th>
                     <th>Ưu tiên</th>
                     <th>Ngày bắt đầu</th>
-                    <th>Tiến độ</th>
+                    <th>Deadline</th>
+                    <th>Trạng thái</th>
                     <th>Hành động</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
+                <tbody id="taskTableBody">
+                  <tr data-task-id="1" data-status="todo" data-assignee="1">
                     <td>Soạn thảo đề cương dự án</td>
-                    <td>An Nguyen</td>
+                    <td>
+                      <div class="task-assignee">
+                        <img
+                          src="https://i.pravatar.cc/150?img=1"
+                          alt="An Nguyen"
+                        />
+                        <span>An Nguyen</span>
+                      </div>
+                    </td>
                     <td>
                       <span class="task-priority priority-high"
                         >Ưu tiên cao</span
                       >
                     </td>
-                    <td class="task-dates">02 - 24</td>
+                    <td class="task-dates">01/02/2024</td>
+                    <td class="task-dates">15/02/2024</td>
                     <td>
                       <div class="status-dropdown">
-                        <span class="task-status status-new">Mới</span>
+                        <span class="task-status status-todo">To do</span>
                         <div class="status-dropdown-content">
-                          <a href="#">Mới</a>
-                          <a href="#">Đang tiến hành</a>
-                          <a href="#">Đã hoàn thành</a>
-                          <a href="#">Tạm dừng</a>
+                          <a href="#" data-status="todo">To do</a>
+                          <a href="#" data-status="in-progress">In Progress</a>
+                          <a href="#" data-status="pending">Pending</a>
+                          <a href="#" data-status="done">Done</a>
                         </div>
                       </div>
                     </td>
@@ -288,25 +362,78 @@
                       </div>
                     </td>
                   </tr>
-                  <tr>
+                  <tr
+                    data-task-id="2"
+                    data-status="in-progress"
+                    data-assignee="4"
+                  >
                     <td>Thiết kế giao diện trang chủ</td>
-                    <td>Dương Lê</td>
+                    <td>
+                      <div class="task-assignee">
+                        <img
+                          src="https://i.pravatar.cc/150?img=4"
+                          alt="Duong Le"
+                        />
+                        <span>Dương Lê</span>
+                      </div>
+                    </td>
                     <td>
                       <span class="task-priority priority-medium"
                         >Ưu tiên trung bình</span
                       >
                     </td>
-                    <td class="task-dates">03 - 24</td>
+                    <td class="task-dates">05/03/2024</td>
+                    <td class="task-dates">20/03/2024</td>
                     <td>
                       <div class="status-dropdown">
                         <span class="task-status status-in-progress"
-                          >Đang tiến hành</span
+                          >In Progress</span
                         >
                         <div class="status-dropdown-content">
-                          <a href="#">Mới</a>
-                          <a href="#">Đang tiến hành</a>
-                          <a href="#">Đã hoàn thành</a>
-                          <a href="#">Tạm dừng</a>
+                          <a href="#" data-status="todo">To do</a>
+                          <a href="#" data-status="in-progress">In Progress</a>
+                          <a href="#" data-status="pending">Pending</a>
+                          <a href="#" data-status="done">Done</a>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="action-buttons">
+                        <button class="action-btn edit">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-task-id="3" data-status="done" data-assignee="3">
+                    <td>Cài đặt cơ sở dữ liệu</td>
+                    <td>
+                      <div class="task-assignee">
+                        <img
+                          src="https://i.pravatar.cc/150?img=3"
+                          alt="Cuong Tran"
+                        />
+                        <span>Cường Trần</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="task-priority priority-high"
+                        >Ưu tiên cao</span
+                      >
+                    </td>
+                    <td class="task-dates">01/02/2024</td>
+                    <td class="task-dates">10/02/2024</td>
+                    <td>
+                      <div class="status-dropdown">
+                        <span class="task-status status-done">Done</span>
+                        <div class="status-dropdown-content">
+                          <a href="#" data-status="todo">To do</a>
+                          <a href="#" data-status="in-progress">In Progress</a>
+                          <a href="#" data-status="pending">Pending</a>
+                          <a href="#" data-status="done">Done</a>
                         </div>
                       </div>
                     </td>
@@ -324,9 +451,356 @@
                 </tbody>
               </table>
             </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+              <div class="pagination-info">
+                Hiển thị <span id="currentItems">1-3</span> của
+                <span id="totalItems">12</span> nhiệm vụ
+              </div>
+              <div class="pagination">
+                <button class="pagination-btn prev" disabled>
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="pagination-numbers">
+                  <button class="pagination-number active">1</button>
+                  <button class="pagination-number">2</button>
+                  <button class="pagination-number">3</button>
+                  <button class="pagination-number">4</button>
+                </div>
+                <button class="pagination-btn next">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
+
+        <footer class="main-footer">
+          <div class="footer-copyright">
+            <p>&copy; 2025 ProjectManager. Tất cả các quyền được bảo lưu.</p>
+          </div>
+          <div class="footer-links">
+            <a href="#">Điều khoản sử dụng</a>
+            <a href="#">Chính sách bảo mật</a>
+            <a href="#">Trợ giúp</a>
+          </div>
+        </footer>
       </main>
+    </div>
+
+    <div class="modal" id="taskModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3 id="taskModalTitle">Thêm nhiệm vụ mới</h3>
+          <button class="modal-close" id="closeTaskModal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="taskForm">
+            <input type="hidden" id="taskId" value="" />
+            <div class="form-group">
+              <label for="taskName"
+                >Tên nhiệm vụ <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="taskName"
+                class="form-control"
+                placeholder="Nhập tên nhiệm vụ"
+                required
+              />
+              <div class="error-message" id="taskNameError"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="taskDescription">Mô tả</label>
+              <textarea
+                id="taskDescription"
+                class="form-control"
+                rows="3"
+                placeholder="Nhập mô tả nhiệm vụ"
+              ></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="taskStartDate"
+                  >Ngày bắt đầu <span class="required">*</span></label
+                >
+                <input
+                  type="date"
+                  id="taskStartDate"
+                  class="form-control"
+                  required
+                />
+                <div class="error-message" id="taskStartDateError"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="taskDueDate"
+                  >Deadline <span class="required">*</span></label
+                >
+                <input
+                  type="date"
+                  id="taskDueDate"
+                  class="form-control"
+                  required
+                />
+                <div class="error-message" id="taskDueDateError"></div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="taskAssigneeSelect"
+                  >Người phụ trách <span class="required">*</span></label
+                >
+                <select id="taskAssigneeSelect" class="form-control" required>
+                  <option value="">-- Chọn người phụ trách --</option>
+                  <option value="1">An Nguyen</option>
+                  <option value="2">Bình Nguyễn</option>
+                  <option value="3">Cường Trần</option>
+                  <option value="4">Dương Lê</option>
+                  <option value="5">Hải Phạm</option>
+                </select>
+                <div class="error-message" id="taskAssigneeError"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="taskPriority"
+                  >Độ ưu tiên <span class="required">*</span></label
+                >
+                <select id="taskPriority" class="form-control" required>
+                  <option value="low">Thấp</option>
+                  <option value="medium">Trung bình</option>
+                  <option value="high">Cao</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="taskStatus"
+                >Trạng thái <span class="required">*</span></label
+              >
+              <select id="taskStatus" class="form-control" required>
+                <option value="todo">To do</option>
+                <option value="in-progress">In Progress</option>
+                <option value="pending">Pending</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" id="cancelTaskBtn">Hủy</button>
+          <button class="btn btn-primary" id="saveTaskBtn">Lưu</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="deleteTaskModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3>Xác nhận xóa</h3>
+          <button class="modal-close" id="closeDeleteTaskModal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Bạn có chắc chắn muốn xóa nhiệm vụ "<span id="deleteTaskName"></span
+            >"?
+          </p>
+          <p class="text-danger">Hành động này không thể hoàn tác.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" id="cancelDeleteTaskBtn">Hủy</button>
+          <button class="btn btn-danger" id="confirmDeleteTaskBtn">Xóa</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="memberModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3>Thêm thành viên</h3>
+          <button class="modal-close" id="closeMemberModal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="search-member">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Tìm kiếm thành viên theo email hoặc tên..."
+            />
+            <button class="btn btn-primary">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+
+          <div class="member-search-results">
+            <div class="member-search-item">
+              <div class="member-avatar">
+                <img src="https://i.pravatar.cc/150?img=10" alt="Member" />
+              </div>
+              <div class="member-info">
+                <h4>Giang Trần</h4>
+                <p>giangtran@example.com</p>
+              </div>
+              <button class="btn btn-sm btn-primary add-member-btn">
+                Thêm
+              </button>
+            </div>
+            <div class="member-search-item">
+              <div class="member-avatar">
+                <img src="https://i.pravatar.cc/150?img=11" alt="Member" />
+              </div>
+              <div class="member-info">
+                <h4>Hương Nguyễn</h4>
+                <p>huongnguyen@example.com</p>
+              </div>
+              <button class="btn btn-sm btn-primary add-member-btn">
+                Thêm
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" id="cancelMemberBtn">Hủy</button>
+          <button class="btn btn-primary" id="saveMemberBtn">Lưu</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="projectModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3 id="projectModalTitle">Sửa dự án</h3>
+          <button class="modal-close" id="closeProjectModal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="projectForm">
+            <input type="hidden" id="projectId" value="1" />
+            <div class="form-group">
+              <label for="projectName"
+                >Tên dự án <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="projectName"
+                class="form-control"
+                placeholder="Nhập tên dự án"
+                value="Xây dựng website thương mại điện tử"
+                required
+              />
+              <div class="error-message" id="projectNameError"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="projectDescription"
+                >Mô tả <span class="required">*</span></label
+              >
+              <textarea
+                id="projectDescription"
+                class="form-control"
+                rows="4"
+                placeholder="Nhập mô tả dự án"
+                required
+              >
+Dự án nhằm phát triển một nền tảng thương mại điện tử với các tính năng phong phú giỏ hàng, thanh toán và quản lý sản phẩm. Giao diện người dùng sẽ được tối ưu hóa cho cả máy tính và thiết bị di động, với trải nghiệm mua sắm trực tuyến liền mạch.</textarea
+              >
+              <div class="error-message" id="projectDescriptionError"></div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="projectStartDate"
+                  >Ngày bắt đầu <span class="required">*</span></label
+                >
+                <input
+                  type="date"
+                  id="projectStartDate"
+                  class="form-control"
+                  value="2024-01-15"
+                  required
+                />
+                <div class="error-message" id="projectStartDateError"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="projectEndDate"
+                  >Ngày kết thúc dự kiến <span class="required">*</span></label
+                >
+                <input
+                  type="date"
+                  id="projectEndDate"
+                  class="form-control"
+                  value="2024-06-30"
+                  required
+                />
+                <div class="error-message" id="projectEndDateError"></div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="projectStatus"
+                >Trạng thái <span class="required">*</span></label
+              >
+              <select id="projectStatus" class="form-control" required>
+                <option value="planning">Lên kế hoạch</option>
+                <option value="in-progress" selected>Đang tiến hành</option>
+                <option value="completed">Hoàn thành</option>
+                <option value="on-hold">Tạm dừng</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" id="cancelProjectBtn">Hủy</button>
+          <button class="btn btn-primary" id="saveProjectBtn">Lưu</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="deleteProjectModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3>Xác nhận xóa</h3>
+          <button class="modal-close" id="closeDeleteProjectModal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Bạn có chắc chắn muốn xóa dự án "<span id="deleteProjectName"
+              >Xây dựng website thương mại điện tử</span
+            >"?
+          </p>
+          <p class="text-danger">
+            Lưu ý: Tất cả nhiệm vụ và dữ liệu liên quan đến dự án này sẽ bị xóa
+            vĩnh viễn. Hành động này không thể hoàn tác.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" id="cancelDeleteProjectBtn">
+            Hủy
+          </button>
+          <button class="btn btn-danger" id="confirmDeleteProjectBtn">
+            Xóa
+          </button>
+        </div>
+      </div>
     </div>
 
     <script src="/Project_FE/js/detail/project-detail.js"></script>
