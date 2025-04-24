@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi Tiết Dự Án | Hệ Thống Quản Lý Dự Án</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/Project_FE/css/detail/project-detail.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">
+            <i class="fas fa-tasks"></i>
+            <h2>ProjectManager</h2>
+          </div>
+          <button id="toggle-sidebar" class="toggle-sidebar">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+
+        <div class="sidebar-user">
+          <div class="user-avatar">
+            <img src="https://i.pravatar.cc/150?img=3" alt="User" />
+          </div>
+          <div class="user-info">
+            <h4>Nguyễn Văn A</h4>
+            <p>Project Manager</p>
+          </div>
+        </div>
+
+        <nav class="sidebar-menu">
+          <ul>
+            <li>
+              <a href="../dashboard/index.html" id="dashboardLink">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="#">
+                <i class="fas fa-project-diagram"></i>
+                <span>Dự án</span>
+              </a>
+            </li>
+            <li>
+              <a href="../task/index.html">
+                <i class="fas fa-tasks"></i>
+                <span>Công việc</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-users"></i>
+                <span>Thành viên</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Lịch</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-chart-bar"></i>
+                <span>Báo cáo</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-cog"></i>
+                <span>Cài đặt</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+          <a href="../auth/login.html">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Đăng xuất</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Top Header -->
+        <header class="main-header">
+          <div class="header-search">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Tìm kiếm..." />
+          </div>
+          <div class="header-actions">
+            <div class="notification-bell">
+              <i class="fas fa-bell"></i>
+              <span class="notification-count">3</span>
+            </div>
+            <div class="header-user">
+              <img src="https://i.pravatar.cc/150?img=3" alt="User" />
+              <span>Nguyễn Văn A</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+        </header>
+
+        <!-- Project Detail Content -->
+        <div class="project-content">
+          <div class="project-header">
+            <h1>Xây dựng website thương mại điện tử</h1>
+            <button class="btn btn-primary" id="addTaskBtn">
+              <i class="fas fa-plus"></i> Thêm nhiệm vụ
+            </button>
+          </div>
+
+          <!-- Project Description -->
+          <div class="project-description">
+            <p>
+              Dự án nhằm phát triển một nền tảng thương mại điện tử với các tính
+              năng phong phú giỏ hàng, thanh toán và quản lý sản phẩm. Giao diện
+              người dùng sẽ được tối ưu hóa cho cả máy tính và thiết bị di động,
+              với trải nghiệm mua sắm trực tuyến liền mạch.
+            </p>
+          </div>
+
+          <!-- Project Members -->
+          <div class="project-section">
+            <div class="section-header">
+              <h2>Thành viên dự án</h2>
+              <button class="btn btn-outline" id="addMemberBtn">
+                <i class="fas fa-plus"></i> Thêm thành viên
+              </button>
+            </div>
+
+            <div class="members-list">
+              <div class="member-card">
+                <div class="member-avatar">
+                  <img src="https://i.pravatar.cc/150?img=1" alt="An Nguyen" />
+                </div>
+                <div class="member-info">
+                  <h4>An Nguyen</h4>
+                  <p>Project Owner</p>
+                </div>
+                <span class="badge badge-primary">PM</span>
+              </div>
+
+              <div class="member-card">
+                <div class="member-avatar">
+                  <img
+                    src="https://i.pravatar.cc/150?img=2"
+                    alt="Binh Nguyen"
+                  />
+                </div>
+                <div class="member-info">
+                  <h4>Bình Nguyễn</h4>
+                  <p>Frontend Developer</p>
+                </div>
+                <span class="badge badge-success">DEV</span>
+              </div>
+
+              <div class="member-card">
+                <div class="member-avatar">
+                  <img src="https://i.pravatar.cc/150?img=3" alt="Cuong Tran" />
+                </div>
+                <div class="member-info">
+                  <h4>Cường Trần</h4>
+                  <p>Backend Developer</p>
+                </div>
+                <span class="badge badge-success">DEV</span>
+              </div>
+
+              <div class="member-card">
+                <div class="member-avatar">
+                  <img src="https://i.pravatar.cc/150?img=4" alt="Duong Le" />
+                </div>
+                <div class="member-info">
+                  <h4>Dương Lê</h4>
+                  <p>UX/UI Designer</p>
+                </div>
+                <span class="badge badge-success">DES</span>
+              </div>
+
+              <div class="member-card">
+                <div class="member-avatar">
+                  <img src="https://i.pravatar.cc/150?img=5" alt="Hai Pham" />
+                </div>
+                <div class="member-info">
+                  <h4>Hải Phạm</h4>
+                  <p>QA Engineer</p>
+                </div>
+                <span class="badge badge-success">QA</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tasks Section -->
+          <div class="project-section">
+            <div class="section-header">
+              <h2>Danh sách nhiệm vụ</h2>
+            </div>
+
+            <div class="task-categories">
+              <div class="category-tabs">
+                <div class="category-tab active">
+                  To do <span class="task-count">4</span>
+                </div>
+                <div class="category-tab">
+                  In Progress <span class="task-count">2</span>
+                </div>
+                <div class="category-tab">
+                  Pending <span class="task-count">1</span>
+                </div>
+                <div class="category-tab">
+                  Done <span class="task-count">5</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tasks-header">
+              <div class="task-filters">
+                <input
+                  type="text"
+                  class="search-input"
+                  placeholder="Tìm kiếm nhiệm vụ..."
+                />
+                <select class="form-select">
+                  <option>Sắp xếp theo</option>
+                  <option>Tên nhiệm vụ</option>
+                  <option>Ưu tiên</option>
+                  <option>Tiến độ</option>
+                </select>
+                <select class="form-select">
+                  <option>Người phụ trách</option>
+                  <option>Tất cả</option>
+                  <option>An Nguyen</option>
+                  <option>Bình Nguyễn</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="tasks-container">
+              <table class="tasks-table">
+                <thead>
+                  <tr>
+                    <th>Tên nhiệm vụ</th>
+                    <th>Người phụ trách</th>
+                    <th>Ưu tiên</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Tiến độ</th>
+                    <th>Hành động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Soạn thảo đề cương dự án</td>
+                    <td>An Nguyen</td>
+                    <td>
+                      <span class="task-priority priority-high"
+                        >Ưu tiên cao</span
+                      >
+                    </td>
+                    <td class="task-dates">02 - 24</td>
+                    <td>
+                      <div class="status-dropdown">
+                        <span class="task-status status-new">Mới</span>
+                        <div class="status-dropdown-content">
+                          <a href="#">Mới</a>
+                          <a href="#">Đang tiến hành</a>
+                          <a href="#">Đã hoàn thành</a>
+                          <a href="#">Tạm dừng</a>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="action-buttons">
+                        <button class="action-btn edit">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Thiết kế giao diện trang chủ</td>
+                    <td>Dương Lê</td>
+                    <td>
+                      <span class="task-priority priority-medium"
+                        >Ưu tiên trung bình</span
+                      >
+                    </td>
+                    <td class="task-dates">03 - 24</td>
+                    <td>
+                      <div class="status-dropdown">
+                        <span class="task-status status-in-progress"
+                          >Đang tiến hành</span
+                        >
+                        <div class="status-dropdown-content">
+                          <a href="#">Mới</a>
+                          <a href="#">Đang tiến hành</a>
+                          <a href="#">Đã hoàn thành</a>
+                          <a href="#">Tạm dừng</a>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="action-buttons">
+                        <button class="action-btn edit">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="/Project_FE/js/detail/project-detail.js"></script>
+  </body>
+</html>
