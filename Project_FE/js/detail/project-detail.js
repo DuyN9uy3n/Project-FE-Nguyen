@@ -756,4 +756,520 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("resize", checkScreenSize);
 
   checkScreenSize();
+  // ===== BIẾN TOÀN CỤC =====
+  // Dữ liệu dự án (giả lập)
+  let currentProject = {
+    id: "1",
+    name: "Xây dựng website thương mại điện tử",
+    description:
+      "Dự án nhằm phát triển một nền tảng thương mại điện tử với các tính năng phong phú giỏ hàng, thanh toán và quản lý sản phẩm. Giao diện người dùng sẽ được tối ưu hóa cho cả máy tính và thiết bị di động, với trải nghiệm mua sắm trực tuyến liền mạch.",
+    status: "in-progress",
+    startDate: "15/01/2024",
+    endDate: "30/06/2024",
+    ownerId: "1",
+  };
+
+  // Dữ liệu thành viên (giả lập)
+  let members = [
+    {
+      id: "1",
+      name: "An Nguyen",
+      email: "an.nguyen@example.com",
+      role: "Project Owner",
+      avatar: "https://i.pravatar.cc/150?img=1",
+      badge: "PM",
+    },
+    {
+      id: "2",
+      name: "Bình Nguyễn",
+      email: "binh.nguyen@example.com",
+      role: "Frontend Developer",
+      avatar: "https://i.pravatar.cc/150?img=2",
+      badge: "DEV",
+    },
+    {
+      id: "3",
+      name: "Cường Trần",
+      email: "cuong.tran@example.com",
+      role: "Backend Developer",
+      avatar: "https://i.pravatar.cc/150?img=3",
+      badge: "DEV",
+    },
+  ];
+
+  // ===== HOÀN THIỆN CHỨC NĂNG HIỂN THỊ CHI TIẾT DỰ ÁN =====
+  function loadProjectDetails() {
+    // Cập nhật tiêu đề trang
+    document.title = `${currentProject.name} | Hệ Thống Quản Lý Dự Án`;
+
+    // Cập nhật breadcrumb
+    const projectBreadcrumb = document.querySelector(".breadcrumb li.active");
+    if (projectBreadcrumb) {
+      projectBreadcrumb.textContent = currentProject.name;
+    }
+
+    // Cập nhật thông tin dự án
+    const projectTitle = document.querySelector(".project-header h1");
+    if (projectTitle) {
+      projectTitle.textContent = currentProject.name;
+    }
+
+    const projectDesc = document.querySelector(".project-description p");
+    if (projectDesc) {
+      projectDesc.textContent = currentProject.description;
+    }
+
+    // Cập nhật số liệu thống kê
+    updateProjectStats();
+  }
+
+  function updateProjectStats() {
+    // Cập nhật thống kê nhiệm vụ
+    const totalTasks = document.getElementById("totalTasks");
+    const completedTasks = document.getElementById("completedTasks");
+    const inProgressTasks = document.getElementById("inProgressTasks");
+    const totalMembers = document.getElementById("totalMembers");
+
+    if (totalTasks) totalTasks.textContent = tasks.length;
+    if (completedTasks)
+      completedTasks.textContent = tasks.filter(
+        (t) => t.status === "done"
+      ).length;
+    if (inProgressTasks)
+      inProgressTasks.textContent = tasks.filter(
+        (t) => t.status === "in-progress"
+      ).length;
+    if (totalMembers) totalMembers.textContent = members.length;
+  }
+
+  // ===== HOÀN THIỆN CHỨC NĂNG QUẢN LÝ THÀNH VIÊN =====
+  function displayMembers() {
+    const membersList = document.getElementById("membersList");
+    if (!membersList) return;
+
+    membersList.innerHTML = "";
+
+    if (members.length === 0) {
+      membersList.innerHTML = `
+      <div class="empty-state">
+        <i class="fas fa-users"></i>
+        <p>Chưa có thành viên nào trong dự án này</p>
+        <button class="btn btn-primary" id="emptyAddMemberBtn">
+          <i class="fas fa-user-plus"></i> Thêm thành viên
+        </button>
+      </div>
+    `;
+
+      // Kết nối nút thêm thành viên
+      const emptyAddMemberBtn = document.getElementById("emptyAddMemberBtn");
+      if (emptyAddMemberBtn) {
+        emptyAddMemberBtn.addEventListener("click", function () {
+          openModal(memberModal);
+        });
+      }
+
+      return;
+    }
+
+    // Hiển thị danh sách thành viên
+    members.forEach((member) => {
+      const memberCard = document.createElement("div");
+      memberCard.className = "member-card";
+      memberCard.innerHTML = `
+      <div class="member-avatar">
+        <img src="${member.avatar}" alt="${member.name}" />
+      </div>
+      <div class="member-info">
+        <h4>${member.name}</h4>
+        <p>${member.role}</p>
+      </div>
+      <span class="badge badge-${member.id === "1" ? "primary" : "success"}">${
+        member.badge
+      }</span>
+      ${
+        member.id !== "1"
+          ? `
+        <button class="btn btn-sm btn-danger remove-member" data-id="${member.id}" style="margin-left: 10px;">
+          <i class="fas fa-times"></i>
+        </button>
+      `
+          : ""
+      }
+    `;
+
+      membersList.appendChild(memberCard);
+    });
+
+    // Kết nối sự kiện xóa thành viên
+    const removeButtons = document.querySelectorAll(".remove-member");
+    removeButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        const memberId = this.getAttribute("data-id");
+        if (confirm(`Bạn có chắc chắn muốn xóa thành viên này khỏi dự án?`)) {
+          removeMember(memberId);
+        }
+      });
+    });
+  }
+
+  // Xóa thành viên
+  function removeMember(memberId) {
+    // Xóa thành viên
+    members = members.filter((m) => m.id !== memberId);
+
+    // Cập nhật hiển thị
+    displayMembers();
+    updateProjectStats();
+
+    // Cập nhật danh sách người thực hiện trong dropdown
+    updateAssigneeDropdowns();
+
+    // Thông báo
+    alert("Đã xóa thành viên khỏi dự án");
+  }
+
+  // Cập nhật dropdown người thực hiện
+  function updateAssigneeDropdowns() {
+    // Cập nhật danh sách người thực hiện trong dropdown filter
+    const taskAssignee = document.getElementById("taskAssignee");
+    if (taskAssignee) {
+      // Lưu lại giá trị hiện tại
+      const currentValue = taskAssignee.value;
+
+      // Xóa tất cả các option cũ
+      while (taskAssignee.options.length > 1) {
+        taskAssignee.remove(1);
+      }
+
+      // Thêm lại từ danh sách members
+      members.forEach((member) => {
+        const option = document.createElement("option");
+        option.value = member.id;
+        option.textContent = member.name;
+        taskAssignee.appendChild(option);
+      });
+
+      // Khôi phục giá trị
+      if (members.some((m) => m.id === currentValue)) {
+        taskAssignee.value = currentValue;
+      } else {
+        taskAssignee.value = "all";
+      }
+    }
+
+    // Cập nhật danh sách người thực hiện trong modal task
+    const taskAssigneeSelect = document.getElementById("taskAssigneeSelect");
+    if (taskAssigneeSelect) {
+      // Lưu lại giá trị hiện tại
+      const currentValue = taskAssigneeSelect.value;
+
+      // Xóa tất cả các option cũ (trừ option rỗng đầu tiên)
+      while (taskAssigneeSelect.options.length > 1) {
+        taskAssigneeSelect.remove(1);
+      }
+
+      // Thêm lại từ danh sách members
+      members.forEach((member) => {
+        const option = document.createElement("option");
+        option.value = member.id;
+        option.textContent = member.name;
+        taskAssigneeSelect.appendChild(option);
+      });
+
+      // Khôi phục giá trị
+      if (members.some((m) => m.id === currentValue)) {
+        taskAssigneeSelect.value = currentValue;
+      } else {
+        taskAssigneeSelect.value = "";
+      }
+    }
+  }
+
+  // ===== NÂNG CAO CHỨC NĂNG QUẢN LÝ NHIỆM VỤ =====
+  function enhanceTaskManagement() {
+    // Thêm hỗ trợ highlight khi tìm kiếm
+    setupTaskStatusSearch();
+
+    // Thêm tooltip cho các nút action
+    addTooltips();
+
+    // Thêm xác nhận khi xóa nhiệm vụ quan trọng
+    enhanceTaskDelete();
+  }
+
+  function setupTaskStatusSearch() {
+    // Thêm style cho highlight
+    const style = document.createElement("style");
+    style.textContent = `
+    .highlight {
+      background-color: #fff3cd;
+      padding: 2px;
+      border-radius: 2px;
+    }
+  `;
+    document.head.appendChild(style);
+
+    // Tăng cường chức năng tìm kiếm với highlight
+    const originalTaskSearch = taskSearch.oninput;
+    taskSearch.oninput = function () {
+      const searchTerm = this.value.trim().toLowerCase();
+
+      // Gọi sự kiện gốc
+      if (originalTaskSearch) {
+        originalTaskSearch.call(this);
+      }
+
+      // Thêm highlight
+      setTimeout(() => {
+        if (searchTerm.length > 0) {
+          const taskCells = document.querySelectorAll(
+            "#taskTableBody tr td:first-child"
+          );
+          taskCells.forEach((cell) => {
+            const text = cell.textContent;
+            const regex = new RegExp(`(${searchTerm})`, "gi");
+            cell.innerHTML = text.replace(
+              regex,
+              '<span class="highlight">$1</span>'
+            );
+          });
+        }
+      }, 100);
+    };
+  }
+
+  function addTooltips() {
+    // Thêm tiêu đề cho các nút
+    const tooltipStyle = document.createElement("style");
+    tooltipStyle.textContent = `
+    [data-tooltip] {
+      position: relative;
+    }
+    [data-tooltip]:before {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0,0,0,0.8);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 10;
+    }
+    [data-tooltip]:hover:before {
+      visibility: visible;
+      opacity: 1;
+    }
+  `;
+    document.head.appendChild(tooltipStyle);
+
+    // Áp dụng tooltip cho các nút edit và delete
+    document.addEventListener("mouseover", function (e) {
+      const target = e.target.closest(".action-btn");
+      if (target) {
+        if (
+          target.classList.contains("edit") &&
+          !target.hasAttribute("data-tooltip")
+        ) {
+          target.setAttribute("data-tooltip", "Chỉnh sửa nhiệm vụ");
+        } else if (
+          target.classList.contains("delete") &&
+          !target.hasAttribute("data-tooltip")
+        ) {
+          target.setAttribute("data-tooltip", "Xóa nhiệm vụ");
+        }
+      }
+    });
+  }
+
+  function enhanceTaskDelete() {
+    // Đảm bảo có xác nhận khi xóa task quan trọng
+    document.addEventListener("click", function (e) {
+      const deleteBtn = e.target.closest(".action-btn.delete");
+      if (deleteBtn) {
+        const taskRow = deleteBtn.closest("tr");
+        const priorityEl = taskRow.querySelector(".task-priority");
+
+        if (priorityEl && priorityEl.classList.contains("priority-high")) {
+          // Thêm class vào modal
+          deleteTaskModal.classList.add("important-task");
+
+          // Thêm cảnh báo nếu chưa có
+          setTimeout(() => {
+            const modalBody = deleteTaskModal.querySelector(".modal-body");
+            if (!modalBody.querySelector(".important-warning")) {
+              const warning = document.createElement("p");
+              warning.className = "text-danger important-warning";
+              warning.innerHTML =
+                "<strong>Cảnh báo:</strong> Đây là nhiệm vụ ưu tiên cao!";
+              modalBody.appendChild(warning);
+            }
+          }, 10);
+        } else {
+          // Xóa class và cảnh báo nếu có
+          deleteTaskModal.classList.remove("important-task");
+          setTimeout(() => {
+            const warningEl =
+              deleteTaskModal.querySelector(".important-warning");
+            if (warningEl) warningEl.remove();
+          }, 10);
+        }
+      }
+    });
+  }
+
+  // ===== KHỞI TẠO VÀ KẾT NỐI CHỨC NĂNG =====
+  function setupMemberModal() {
+    // Sample data cho tìm kiếm thành viên
+    const potentialMembers = [
+      {
+        id: "4",
+        name: "Giang Trần",
+        email: "giang.tran@example.com",
+        avatar: "https://i.pravatar.cc/150?img=10",
+      },
+      {
+        id: "5",
+        name: "Hương Nguyễn",
+        email: "huong.nguyen@example.com",
+        avatar: "https://i.pravatar.cc/150?img=11",
+      },
+      {
+        id: "6",
+        name: "Khánh Lê",
+        email: "khanh.le@example.com",
+        avatar: "https://i.pravatar.cc/150?img=12",
+      },
+      {
+        id: "7",
+        name: "Minh Đặng",
+        email: "minh.dang@example.com",
+        avatar: "https://i.pravatar.cc/150?img=13",
+      },
+    ];
+
+    // Kết nối chức năng tìm kiếm thành viên
+    const searchMemberInput = document.getElementById("searchMember");
+    const searchMemberBtn = document.querySelector("#memberModal .btn-primary");
+    const memberSearchResults = document.getElementById("memberSearchResults");
+
+    if (searchMemberBtn && searchMemberInput && memberSearchResults) {
+      searchMemberBtn.addEventListener("click", function () {
+        const searchTerm = searchMemberInput.value.trim().toLowerCase();
+        if (searchTerm.length < 2) {
+          alert("Vui lòng nhập ít nhất 2 ký tự để tìm kiếm");
+          return;
+        }
+
+        // Lọc kết quả
+        const filteredMembers = potentialMembers.filter(
+          (member) =>
+            (member.name.toLowerCase().includes(searchTerm) ||
+              member.email.toLowerCase().includes(searchTerm)) &&
+            !members.some((m) => m.id === member.id)
+        );
+
+        // Hiển thị kết quả
+        memberSearchResults.innerHTML = "";
+
+        if (filteredMembers.length === 0) {
+          memberSearchResults.innerHTML = `
+          <div class="text-center p-3">
+            <p>Không tìm thấy thành viên phù hợp</p>
+          </div>
+        `;
+          return;
+        }
+
+        filteredMembers.forEach((member) => {
+          const memberItem = document.createElement("div");
+          memberItem.className = "member-search-item";
+          memberItem.innerHTML = `
+          <div class="member-avatar">
+            <img src="${member.avatar}" alt="${member.name}" />
+          </div>
+          <div class="member-info">
+            <h4>${member.name}</h4>
+            <p>${member.email}</p>
+          </div>
+          <button class="btn btn-sm btn-primary add-member-btn" data-id="${member.id}" data-name="${member.name}">
+            Thêm
+          </button>
+        `;
+
+          memberSearchResults.appendChild(memberItem);
+        });
+
+        // Kết nối các nút thêm thành viên
+        const addButtons =
+          memberSearchResults.querySelectorAll(".add-member-btn");
+        addButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const memberId = this.getAttribute("data-id");
+            const memberName = this.getAttribute("data-name");
+
+            // Tìm thông tin thành viên
+            const member = potentialMembers.find((m) => m.id === memberId);
+            if (member) {
+              // Thêm thành viên vào dự án
+              members.push({
+                id: member.id,
+                name: member.name,
+                email: member.email,
+                role: "Team Member",
+                avatar: member.avatar,
+                badge: "DEV",
+              });
+
+              // Cập nhật hiển thị
+              displayMembers();
+              updateProjectStats();
+              updateAssigneeDropdowns();
+
+              // Thông báo
+              alert(`Đã thêm ${member.name} vào dự án`);
+
+              // Xóa item khỏi kết quả tìm kiếm
+              this.closest(".member-search-item").remove();
+            }
+          });
+        });
+      });
+
+      // Thêm hỗ trợ Enter để tìm kiếm
+      searchMemberInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          searchMemberBtn.click();
+        }
+      });
+    }
+  }
+
+  // Khởi tạo các chức năng mở rộng
+  function initializeExtendedFeatures() {
+    // Tải dữ liệu dự án
+    loadProjectDetails();
+
+    // Hiển thị danh sách thành viên
+    displayMembers();
+
+    // Cập nhật dropdown người thực hiện
+    updateAssigneeDropdowns();
+
+    // Nâng cao chức năng nhiệm vụ
+    enhanceTaskManagement();
+
+    // Kết nối modal thêm thành viên
+    setupMemberModal();
+  }
+
+  // Gọi hàm khởi tạo
+  initializeExtendedFeatures();
 });

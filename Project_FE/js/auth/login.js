@@ -26,6 +26,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (isValid) {
       if (email === "admin@gmail.com" && password === "admin123") {
+        if (email === "admin@gmail.com" && password === "admin123") {
+          localStorage.setItem("isLoggedIn", "true");
+          window.location.href = "../../pages/dashboard/dashboard.html";
+        }
+
         window.location.href = "../../pages/dashboard/dashboard.html";
       } else {
         passwordError.textContent = "Email hoặc mật khẩu không đúng";
